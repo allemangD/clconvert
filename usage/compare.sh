@@ -10,7 +10,7 @@ rm $d_out/*
 
 cp "$f_in" "$d_out/base.json"
 
-for version in $(python convert.py versions); do
+for version in $(clc versions); do
   result="${d_out}/${version}.json"
-  python convert.py convert "$f_in" "$result" -v? -t "$version" 2> /dev/null
+  clc convert "$f_in" "$result" -v? -t "$version" 2> /dev/null
 done
