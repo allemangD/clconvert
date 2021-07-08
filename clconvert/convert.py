@@ -3,7 +3,7 @@ import json
 import sys
 from pathlib import Path
 
-import converters
+from clconvert import converters
 
 
 def convert(args):

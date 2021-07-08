@@ -1,11 +1,23 @@
-import model
+from clconvert import model
+
 
 class Converter(model.Converter):
     @classmethod
     def normalize(cls, data: dict):
         doc = model.Document()
 
-        # this format only supports one markup
+        # expect these to be present, even though we don't actually need them.
+        # conversion will still fail so that inference works correctly.
+        _ = data["DefaultCameraPosition"]
+        _ = data["DefaultCameraViewUp"]
+        _ = data["DefaultOntology"]
+        _ = data["DefaultReferenceView"]
+        _ = data["DefaultRepresentationType"]
+        _ = data["DefaultSplineOrientation"]
+        _ = data["DefaultStepSize"]
+        _ = data["DefaultThickness"]
+
+        # set document-wide values based on the currently selected markup.
         doc.current_id = 0
         for i, dmark in enumerate(data['Markups']):
             if dmark['Selected']:
@@ -19,6 +31,7 @@ class Converter(model.Converter):
 
                 break
 
+        # copy markup-specific values
         for i, dmark in enumerate(data['Markups']):
             ann = model.Annotation()
             ann.name = dmark['Label']
@@ -41,8 +54,18 @@ class Converter(model.Converter):
     @classmethod
     def specialize(cls, doc: model.Document):
         data = dict()
-        data['version'] = '0.0.0+2019.01.26'
+        data['version'] = '0.0.0+2020.04.16'
 
+        data["DefaultCameraPosition"] = doc.camera_position
+        data["DefaultCameraViewUp"] = doc.camera_view_up
+        data["DefaultOntology"] = doc.ontology
+        data["DefaultReferenceView"] = doc.reference_view
+        data["DefaultRepresentationType"] = "polyline"
+
+        current_ann = doc.annotations[doc.current_id]
+        data["DefaultSplineOrientation"] = current_ann.orientation
+        data["DefaultStepSize"] = doc.stepSize
+        data["DefaultThickness"] = current_ann.thickness
         data["Locked"] = 0
         data["MarkupLabelFormat"] = "%N-%d"
 
@@ -75,7 +98,6 @@ class Converter(model.Converter):
         ]
 
         data['Markups'][doc.current_id]['Selected'] = 1
-        data['Markups'][doc.current_id]['Locked'] = 0
 
         data['Markups_Count'] = len(doc.annotations)
         data['TextList'] = [None]

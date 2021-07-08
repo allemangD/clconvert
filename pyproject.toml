@@ -1,0 +1,23 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "clconvert"
+authors = [
+    { name = "David Allemang", email = "david.allemang@kitware.com" },
+]
+dependencies = []
+requires-python = ">=3.7"
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3"
+]
+dynamic = ["version", "description"]
+
+[project.urls]
+Documentation="https://cell-locator.readthedocs.io/"
+Source="https://github.com/allemangd/clconvert"
+
+[project.scripts]
+clc="clconvert.convert:main"

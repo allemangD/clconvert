@@ -2,7 +2,7 @@ import importlib.util
 from pathlib import Path
 from typing import Dict, Tuple, Generator
 
-import model
+from clconvert import model
 
 __all__ = [
     'version_order', 'latest_version', 'infer_normalize', 'match', 'find_latest'
