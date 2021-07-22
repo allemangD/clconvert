@@ -1,4 +1,4 @@
-# CLConvert
+# cell-locator-files conversion tool
 
 [Cell Locator][cell-locator] File Format Conversion Tool
 
