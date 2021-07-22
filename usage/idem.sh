@@ -11,8 +11,8 @@ rm $d_out/*
 
 for sample in $d_in/*.json; do
   result="${d_out}/${sample##*/}"
-  version=$(clc infer "$sample")
-  clc convert "$sample" "$result" -v "$version" -t "$version"
+  version=$(cell-locator-files infer "$sample")
+  cell-locator-files convert "$sample" "$result" -v "$version" -t "$version"
 done
 
 meld "$d_in" "$d_out" 2> /dev/null

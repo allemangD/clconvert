@@ -3,7 +3,7 @@ requires = ["flit_core >=2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "clconvert"
+name = "cell_locator_files"
 authors = [
     { name = "David Allemang", email = "david.allemang@kitware.com" },
 ]
@@ -20,4 +20,5 @@ Documentation="https://cell-locator.readthedocs.io/"
 Source="https://github.com/allemangd/clconvert"
 
 [project.scripts]
-clc="clconvert.convert:main"
+cell-locator-files="cell_locator_files.convert:main"
+

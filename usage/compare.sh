@@ -10,7 +10,7 @@ rm $d_out/*
 
 cp "$f_in" "$d_out/base.json"
 
-for version in $(clc versions); do
+for version in $(cell-locator-files versions); do
   result="${d_out}/${version}.json"
-  clc convert "$f_in" "$result" -v? -t "$version" 2> /dev/null
+  cell-locator-files convert "$f_in" "$result" -v? -t "$version" 2> /dev/null
 done

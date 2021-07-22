@@ -8,5 +8,5 @@ mkdir -p $d_out
 
 for sample in $d_in/*.json; do
   result="${d_out}/${sample##*/}"
-  clc convert "$sample" "$result" -v? 2> /dev/null
+  cell-locator-files convert "$sample" "$result" -v? 2> /dev/null
 done
